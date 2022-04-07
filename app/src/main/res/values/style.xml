@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ArabicStyle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/amiri_regular</item>
+        <item name="android:mirrorForRtl">true</item>
+        <item name="android:supportsRtl">true</item>
+    </style>
+
+    <style name="Tes" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

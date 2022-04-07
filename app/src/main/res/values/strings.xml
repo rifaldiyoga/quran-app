@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Quran App</string>
+    <string name="quran_app">Quran App</string>
+    <string name="learn_quran_and_recite_once_everyday">Learn Quran and\nRecite once everyday</string>
+    <string name="assalamualaikum">Assalamualaikum</string>
+    <string name="default_name">Rifaldi Yoga Andriansyah</string>
+    <string name="last_read">Last Read</string>
+    <string name="ayah_1">Ayah 1</string>
+    <string name="al_fatihah">Al-Fatihah</string>
+    <string name="_1">1</string>
+    <string name="mekah_7_verses">Mekah, 7 VERSES</string>
+    <string name="start_your_reading">Start Your\nReading</string>
+</resources>

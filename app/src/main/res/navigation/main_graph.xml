@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_home"
+        android:id="@+id/homeFragment"
+        android:name="com.rifaldi.yoga.quranapp.presentation.ui.fragment.HomeFragment"
+        android:label="@string/app_name" >
+        <action
+            android:id="@+id/action_homeFragment_to_surahFragment"
+            app:destination="@id/surahFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_surah"
+        android:id="@+id/surahFragment"
+        android:name="com.rifaldi.yoga.quranapp.presentation.ui.fragment.SurahFragment"
+        android:label="SurahFragment" >
+        <argument
+            android:name="surah"
+            app:argType="com.rifaldi.yoga.quranapp.domain.model.SurahModel" />
+    </fragment>
+
+
+</navigation>
