@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.rifaldi.yoga.quranapp.R
 import com.rifaldi.yoga.quranapp.databinding.ItemAyahBinding
 import com.rifaldi.yoga.quranapp.databinding.ItemTitleSurahBinding
 import com.rifaldi.yoga.quranapp.domain.model.AyahModel
@@ -14,7 +15,7 @@ import com.rifaldi.yoga.quranapp.presentation.ui.adapter.viewholder.TitleViewHol
 /**
  * Created by aldi on 05/04/22.
  */
-class AyahAdapter(private val model: SurahModel) : ListAdapter<AyahModel, RecyclerView.ViewHolder>(DiffCallback()) {
+class AyahAdapter(private val model: SurahModel, val onClickBookmark : (Int,AyahModel) -> Unit, val onClickShare : (AyahModel) -> Unit) : ListAdapter<AyahModel, RecyclerView.ViewHolder>(DiffCallback()) {
 
     private val TITLE_ITEM = 1
     private val AYAH_ITEM = 0
@@ -51,6 +52,15 @@ class AyahAdapter(private val model: SurahModel) : ListAdapter<AyahModel, Recycl
                 tvNumber.text = model.number.inSurah.toString()
                 tvAyah.text = model.text.arab
                 tvTranslate.text = model.translation.en
+                imageBookmark.setImageResource(if(!model.isBookmark) R.drawable.ic_bookmark else R.drawable.ic_bookmark_fill)
+                imageBookmark.setOnClickListener {
+                    onClickBookmark(absoluteAdapterPosition, model)
+                    model.isBookmark = !model.isBookmark
+                    notifyItemChanged(absoluteAdapterPosition)
+                }
+                imageShare.setOnClickListener {
+                    onClickShare(model)
+                }
             }
         }
     }

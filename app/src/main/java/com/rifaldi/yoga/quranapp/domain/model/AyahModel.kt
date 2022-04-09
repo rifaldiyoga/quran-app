@@ -12,11 +12,13 @@ data class AyahModel(
     var text : Text = Text(),
     var translation: Translation = Translation(),
     var audio : Audio = Audio(),
+    var isBookmark : Boolean = false
 ) : Parcelable {
 
     @Parcelize
     data class Number(
-        var inSurah : Int = -1
+        var inSurah : Int = -1,
+        var inQuran : Int = -1
     ) : Parcelable
 
     @Parcelize

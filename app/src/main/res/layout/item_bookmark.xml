@@ -30,21 +30,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvSurahTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/al_fatihah"
+            android:textColor="?colorOnBackground"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNumber"
+            app:layout_constraintStart_toEndOf="@+id/tvNumber"
+            app:layout_constraintTop_toTopOf="@+id/tvNumber" />
+
         <ImageView
-            android:id="@+id/imageShare"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageBookmark"
+            app:layout_constraintEnd_toStartOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageBookmark"
+            android:id="@+id/imageView4"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_bookmark"
+            android:src="@drawable/ic_bookmark_fill"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

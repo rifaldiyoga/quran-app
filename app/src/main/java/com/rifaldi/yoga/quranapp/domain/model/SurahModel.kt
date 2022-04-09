@@ -13,7 +13,7 @@ data class SurahModel(
     var revelation : Revelation = Revelation(),
     var preBismillah : PreBismillah?,
     var numberOfVerses : Int = -1,
-    var verses : List<AyahModel>? = null
+    var verses : List<AyahModel>? = null,
 ) : Parcelable {
 
     @Parcelize

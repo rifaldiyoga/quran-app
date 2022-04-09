@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_surahFragment"
             app:destination="@id/surahFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bookmarkFragment"
+            app:destination="@id/bookmarkFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_surah"
@@ -23,6 +26,11 @@
             android:name="surah"
             app:argType="com.rifaldi.yoga.quranapp.domain.model.SurahModel" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_bookmark"
+        android:id="@+id/bookmarkFragment"
+        android:name="com.rifaldi.yoga.quranapp.presentation.ui.fragment.BookmarkFragment"
+        android:label="Bookmark" />
 
 
 </navigation>

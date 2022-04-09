@@ -55,9 +55,7 @@ class HomeFragment : Fragment(), BaseInterface {
 
     override fun initComponents() {
         binding.apply {
-            val nama = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("nama", "")
-            if(!nama.isNullOrEmpty())
-                tvName.text = nama
+            setName()
             surahAdapter = SurahAdapter(onItemClick = {
                 val action = HomeFragmentDirections.actionHomeFragmentToSurahFragment(it)
                 findNavController().navigate(action)
@@ -75,7 +73,6 @@ class HomeFragment : Fragment(), BaseInterface {
             tvName.setOnClickListener {
                 tvName.visibility = View.INVISIBLE
                 etName.visibility = View.VISIBLE
-                etName.setText(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("nama", ""))
                 etName.requestFocus()
             }
 
@@ -85,10 +82,17 @@ class HomeFragment : Fragment(), BaseInterface {
                     etName.visibility = View.GONE
                     PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putString("nama", etName.text.toString().trim()).apply()
                     tvName.text = etName.text.toString().trim()
+                    setName()
                 }
                 return@setOnEditorActionListener false
             }
         }
+    }
+
+    fun setName() {
+        val name = (PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("nama", ""))
+        val a = if(name!!.isEmpty()) getString(R.string.default_name) else name
+        binding.tvName.setText(a)
     }
 
     override fun subscribeObservers() {

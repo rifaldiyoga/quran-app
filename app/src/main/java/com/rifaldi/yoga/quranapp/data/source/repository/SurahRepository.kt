@@ -1,5 +1,6 @@
 package com.rifaldi.yoga.quranapp.data.source.repository
 
+import com.rifaldi.yoga.quranapp.data.source.local.dao.BookmarkDao
 import com.rifaldi.yoga.quranapp.data.source.local.dao.LastReadDao
 import com.rifaldi.yoga.quranapp.data.source.local.model.LastReadEntitiy
 import com.rifaldi.yoga.quranapp.data.source.remote.ApiUtils
@@ -19,7 +20,8 @@ import javax.inject.Inject
  */
 class SurahRepository @Inject constructor(
     private val apiUtils: ApiUtils,
-    private val lastReadDao: LastReadDao
+    private val lastReadDao: LastReadDao,
+    private val bookmarkDao: BookmarkDao
 ) : ISurahRepository {
 
     override fun getSurahList(): Flow<Resource<List<SurahModel>>> = flow {
@@ -46,8 +48,13 @@ class SurahRepository @Inject constructor(
                     numberOfVerses = data.numberOfVerses,
                     surahNameArabic = data.name.short)
                 lastReadDao.insertLastRead(model)
-            }
+                val bookmarkList = bookmarkDao.getBookmarkBySurahList(data.name.transliteration.en)!!.map { it.numberOfAyah }
 
+                data.verses!!.map { ayah ->
+                    if(bookmarkList.contains(ayah.number.inQuran))
+                        ayah.isBookmark = true
+                }
+            }
             emit(Resource.success(data.verses!!))
         } catch (e : Exception){
             emit(Resource.error(null, e.message!!, 1))

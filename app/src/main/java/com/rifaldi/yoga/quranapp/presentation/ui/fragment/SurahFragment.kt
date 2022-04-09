@@ -19,6 +19,7 @@ import com.rifaldi.yoga.quranapp.presentation.ui.adapter.SurahAdapter
 import com.rifaldi.yoga.quranapp.presentation.ui.base.BaseInterface
 import com.rifaldi.yoga.quranapp.presentation.ui.viewmodel.SurahViewModel
 import com.rifaldi.yoga.quranapp.presentation.utils.Resource
+import com.rifaldi.yoga.quranapp.presentation.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -62,7 +63,17 @@ class SurahFragment : Fragment(), BaseInterface {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = viewModel.state.value.surah!!.name.transliteration.en
 
         binding.apply {
-            ayahAdapter = AyahAdapter(viewModel.state.value.surah!!)
+            ayahAdapter = AyahAdapter(viewModel.state.value.surah!!,
+                onClickBookmark = { pos, model ->
+                    if(!model.isBookmark)
+                      viewModel.addBookmark(model)
+                    else
+                        viewModel.deleteBookmark(model)
+                },
+                onClickShare = {
+                    val state = viewModel.state.value
+                    Utils.sendText(requireActivity(), it.text.arab, it.translation.en, state.surah!!.name.transliteration.en, it.number.inSurah)
+                })
 
             rvList.apply {
                 adapter = ayahAdapter
@@ -81,12 +92,14 @@ class SurahFragment : Fragment(), BaseInterface {
             it?.let {
                 when(it.status){
                     Resource.Status.LOADING -> {
-
+                        setVisibility(true)
                     }
                     Resource.Status.SUCCESS -> {
+                        setVisibility(false)
                         ayahAdapter.submitList(it.data?.toMutableList())
                     }
                     Resource.Status.ERROR -> {
+                        setVisibility(false)
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -98,6 +111,18 @@ class SurahFragment : Fragment(), BaseInterface {
                 viewModel.state.collectLatest {
                     viewModel.getList(it.surah!!.number)
                 }
+            }
+        }
+    }
+
+    fun setVisibility(loading : Boolean){
+        binding.apply {
+            if(loading){
+                progressBar.visibility = View.VISIBLE
+                rvList.visibility = View.GONE
+            } else {
+                progressBar.visibility = View.GONE
+                rvList.visibility = View.VISIBLE
             }
         }
     }

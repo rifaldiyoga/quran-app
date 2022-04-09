@@ -3,6 +3,7 @@ package com.rifaldi.yoga.quranapp.di
 import android.content.Context
 import androidx.room.Room
 import com.rifaldi.yoga.quranapp.data.source.local.QuranDatabase
+import com.rifaldi.yoga.quranapp.data.source.local.dao.BookmarkDao
 import com.rifaldi.yoga.quranapp.data.source.local.dao.LastReadDao
 import dagger.Module
 import dagger.Provides
@@ -32,6 +33,12 @@ object LocalAppModule {
     @Singleton
     fun provideLastReadDao(quranDatabase: QuranDatabase) : LastReadDao {
         return quranDatabase.lastReadDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideBookmarkDao(quranDatabase: QuranDatabase) : BookmarkDao {
+        return quranDatabase.bookmarkDao
     }
 
 }
