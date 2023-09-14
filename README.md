@@ -1,5 +1,7 @@
 # Quran App
 
-Simple quran App to read quran with translation in english, you can bookmark your favorit ayah to and share it too.. other people!
+Simple Quran App, read quran with english translation, you can bookmark your favorit ayah to and share to other people!
 
-Its avaiable in dark mode and light mode
+Its avaiable in dark mode and light mode. 
+
+Happy reading Quran everyoneee :)) 
